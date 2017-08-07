@@ -1,0 +1,34 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Pager
+@using MvcContrib.UI.Grid
+@model IEnumerable<Web.Models.ResearchedSampelViewModel>
+
+@{
+    ViewBag.FirstHalf = "лаборатория ";
+    ViewBag.SecondHalf = "химии";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Результаты исследований</h3>
+
+@Html.Grid(Model).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+                                    {
+                                        column.For(x => x.SampleId).Named("№");
+                                        column.For(x => x.SampleName).Named("Наименование");
+                                        column.For(x => x.ResultDate.ToShortDateString()).Named("Дата").SortColumnName("ResultDate");
+                                        column.For(x => x.ResultValue).Named("Результат");
+                                        column.For(x => x.LevelValue).Named("ДУ");
+                                        column.For(x => x.Units).Named("");
+                                        column.For(x => @Html.ActionLink("Протокол", "Protocol", new { id = x.ResultId }));
+                                    })
+
+@Html.Raw(Html.Pager((IPagination)Model).Format("").First(null).Last(null).Next("Следующая страница").Previous("‌​Предыдущая страница").ToString())
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "ChemLab")
+            @Html.ActionLink("Результаты", "Results", "ChemLab")
+        </div>
+    </div>
+}

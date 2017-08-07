@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div id="main">
+            <div id="topmenu">
+                @Html.ActionLink("выход", "Index", "Home")
+            </div>
+            <div id="header">
+                <span class="title">@ViewBag.FirstHalf<span class="darktitle">@ViewBag.SecondHalf</span></span><br/>
+            </div>
+            <div id="content">
+    
+                @RenderBody()
+
+                <div id="footer"> &copy; 2014 Власовец В.А. Дипломная работа. </div>
+            </div>
+
+            @RenderSection("Menu", false)
+
+        </div>
+    </body>
+</html>

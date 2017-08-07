@@ -1,0 +1,32 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Pager
+@using MvcContrib.UI.Grid
+@model IEnumerable<Web.Models.SelectedSamplesOutViewModel>
+
+@{
+    ViewBag.FirstHalf = "отбор ";
+    ViewBag.SecondHalf = "проб";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Отобранные пробы</h3>
+
+@Html.Grid(Model).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+                                    {
+                                        column.For(x => x.RegistrationNumber).Named("№");
+                                        column.For(x => x.SampleName).Named("Наименование");
+                                        column.For(x => x.Applicant).Named("Заявитель");
+                                        column.For(x => x.SamplingDate.ToShortDateString()).Named("Отбор").SortColumnName("SamplingDate");
+                                        column.For(x => @Html.ActionLink("Акт", "SamplingAct", new {id = x.RegistrationNumber}));
+                                    })
+
+@Html.Raw(Html.Pager((IPagination)Model).Format("").First(null).Last(null).Next("Следующая страница").Previous("‌​Предыдущая страница").ToString())
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Sampling")
+            @Html.ActionLink("Отобранные пробы", "SelectedSamples", "Sampling")
+        </div>
+    </div>
+}

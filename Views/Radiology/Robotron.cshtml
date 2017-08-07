@@ -1,0 +1,34 @@
+﻿@model Web.Models.RobotronViewModel
+
+@{
+    ViewBag.FirstHalf = "радио";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Расчет активности гамма-излучения для спектрометра Robotron</h3>
+
+@using (Html.BeginForm())
+{
+    <p>Число распадов пробы<br />@Html.TextBoxFor(x => x.NumberOfDecaysSample) @Html.ValidationMessageFor(x => x.NumberOfDecaysSample)</p>
+    <p>Число распадов фона<br/>@Html.TextBoxFor(x => x.NumberOfDecaysBackground) @Html.ValidationMessageFor(x => x.NumberOfDecaysBackground)</p>
+    <p>Масса пробы, кг<br/>@Html.TextBoxFor(x => x.SampleMass) @Html.ValidationMessageFor(x => x.SampleMass)</p>
+    
+    if (Model != null && Model.Activity != null)
+    {
+         <h3>Результат: @Model.Activity &plusmn; @Model.AbsoluteError Бк/кг</h3>
+    }
+    <input type="submit" value="Рассчитать" id="RobotronButton"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Radiology")
+            @Html.ActionLink("Результаты", "Results", "Radiology")
+            @Html.ActionLink("Вычисления для Robotron", "Robotron", "Radiology")
+            @Html.ActionLink("Вычисления ЕРН", "Ern", "Radiology")
+            @Html.ActionLink("Вычисления для УМФ-2000", "Umf", "Radiology")
+        </div>
+    </div>
+}

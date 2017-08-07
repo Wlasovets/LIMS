@@ -1,0 +1,28 @@
+﻿@model Web.Models.MetrologyReportViewModel
+
+@{
+    ViewBag.FirstHalf = "метро";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Формирование отчета о загруженности средств измерения</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <p>Средство измерения<br/>@Html.DropDownListFor(x => x.SelectedGage, new SelectList(Model.Gages, "Id", "Name")) @Html.ValidationMessageFor(x => x.SelectedGage)</p>
+    <p>Начало отчетного периода<br/>@Html.TextBoxFor(x => x.FirstDate, new { Value = "" }) @Html.ValidationMessageFor(x => x.FirstDate)</p>
+    <p>Конец отчетного периода<br/>@Html.TextBoxFor(x => x.LastDate, new { Value = ""}) @Html.ValidationMessageFor(x => x.LastDate)</p>
+    <input type="submit" value="Отчёт" id="ReportButton"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Средства измерений", "Index", "Metrology")
+            @Html.ActionLink("ТНПА", "TechnicalRegulations", "Metrology")
+            @Html.ActionLink("Отчёт", "Report", "Metrology")
+        </div>
+    </div>
+}

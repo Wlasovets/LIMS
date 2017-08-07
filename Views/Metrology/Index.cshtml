@@ -1,0 +1,57 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Pager
+@using MvcContrib.UI.Grid
+@model Web.Models.GageViewModel
+
+@{
+    ViewBag.FirstHalf = "метро";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    @using (Html.BeginForm())
+    {
+        <h3>Добавление средства измерений</h3>
+        <table id="block">
+            <tr style="vertical-align: bottom">
+                <td>Наименование<br/>@Html.TextBoxFor(x => x.Name)</td>
+                <td>Заводской номер<br/>@Html.TextBoxFor(x => x.SerialNumber)</td>
+                <td><input id="tnpaButton" type="submit" value="Добавить"/></td></tr>
+        </table>
+    }
+    
+    @if (ViewBag.GagesGrid != null)
+    {
+    @Html.Grid((IEnumerable<Web.Models.GageGridViewModel>)ViewBag.GagesGrid).Sort((GridSortOptions)ViewBag.Sort).Columns(
+        column =>
+        {
+            column.For(x => x.GageName).Named("Наименование");
+            column.For(x => x.SerialNumber).Named("Зав. №");
+            column.For(x => x.EndVerification).Named("Срок поверки").SortColumnName("EndVerification");
+            column.For(x => Html.ActionLink(x.State, "ChangeState", new { id = x.GageId })).Encode(false).Named("Состояние").SortColumnName("State");
+            column.For(x => Html.ActionLink("поверить", "Verification", new { id = x.GageId })).Encode(false);
+        })
+    }
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Средства измерений", "Index", "Metrology")
+            @Html.ActionLink("ТНПА", "TechnicalRegulations", "Metrology")
+            @Html.ActionLink("Отчёт", "Report", "Metrology")
+        </div>
+        @if(ViewBag.ExpirationOfVerification != null)
+        {
+            <p>
+                Истекает срок поверки средств измерения: <br/>
+
+                @foreach(string gage in ViewBag.ExpirationOfVerification)
+                {
+                    <br/>
+                    @gage
+                    <br/>
+                }
+            </p>
+        }
+    </div>
+}

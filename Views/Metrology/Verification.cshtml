@@ -1,0 +1,35 @@
+﻿@model Web.Models.CertificateViewModel
+
+@{
+    ViewBag.FirstHalf = "метро";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>
+    Свидетельство о поверке.<br/>
+    @Model.GageName, зав. &#8470; @Model.SerialNumber
+</h3>
+
+@using (Html.BeginForm())
+{
+    <p>@Html.ValidationSummary(true)</p>
+
+    <p>Номер свидетельства<br />@Html.TextBoxFor(x => x.CertificateNumber) @Html.ValidationMessageFor(x => x.CertificateNumber)</p>
+    <p>Дата поверки<br/>@Html.TextBoxFor(x => x.VerificationDate, new { @Value = "" }) @Html.ValidationMessageFor(x => x.VerificationDate)</p>
+    <p>Срок поверки<br/>@Html.TextBoxFor(x => x.EndVerificationDate, new { @Value = "" }) @Html.ValidationMessageFor(x => x.EndVerificationDate)</p>
+    @Html.HiddenFor(x => x.GageId)
+    @Html.HiddenFor(x => x.GageName)
+    @Html.HiddenFor(x => x.SerialNumber)
+    <input id="VerificationButton" type="submit" value="Поверить"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Средства измерений", "Index", "Metrology")
+            @Html.ActionLink("ТНПА", "TechnicalRegulations", "Metrology")
+            @Html.ActionLink("Отчёт", "Report", "Metrology")
+        </div>
+    </div>
+}

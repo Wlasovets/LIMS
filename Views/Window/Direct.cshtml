@@ -1,0 +1,31 @@
+﻿@model Web.Models.DirectViewModel
+
+@{
+    ViewBag.FirstHalf = "одно ";
+    ViewBag.SecondHalf = "окно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>Выберите отделы для направления пробы:<br/>&#8470; @ViewBag.SampleId. @ViewBag.SampleName.</p>
+
+@using(Html.BeginForm())
+{
+    @Html.Hidden("SampleId", (int)ViewBag.SampleId)
+    <p>@Html.CheckBoxFor(x => x.DirectToSelect) Отбор проб</p>
+    <p>@Html.CheckBoxFor(x => x.DirectToToxicology) Токсикология</p>
+    <p>@Html.CheckBoxFor(x => x.DirectToBacteriology) Бактериология</p>
+    <p>@Html.CheckBoxFor(x => x.DirectToChemicalLab) Химлаборатория</p>
+    <p>@Html.CheckBoxFor(x => x.DirectToRadiology) Радиология</p>
+    <input type="submit" id="DirectButton" value="Направить"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Регистрация проб", "Index", "Window")
+            @Html.ActionLink("Направления", "Directions", "Window")
+            @Html.ActionLink("Отчёт", "Report", "Window")
+            @Html.ActionLink("Сотрудники", "Employees", "Window")
+        </div>
+    </div>
+}

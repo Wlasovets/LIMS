@@ -1,0 +1,49 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Pager
+@using MvcContrib.UI.Grid
+@model Web.Models.RegistrationViewModel
+
+@{
+    ViewBag.FirstHalf = "одно ";
+    ViewBag.SecondHalf = "окно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Регистрация сотрудника</h3>
+
+<div id="block">
+    @using(Html.BeginForm())
+    {
+        <p>@Html.ValidationSummary(true)</p>
+        <p>@Html.ValidationMessageFor(x=>x.ConfirmPassword)</p>
+        <table>
+            <tr><td>Логин<br/>@Html.TextBoxFor(x => x.Login)</td><td>Имя<br/>@Html.TextBoxFor(x => x.FirstName)</td><td>Должность<br/>@Html.TextBoxFor(x => x.Post)</td></tr>
+            <tr><td>Пароль<br/>@Html.EditorFor(x => x.Password)</td><td>Фамилия<br/>@Html.TextBoxFor(x => x.LastName)</td><td>Отдел<br/>@Html.TextBoxFor(x => x.Department)</td></tr>
+            <tr><td>Повторный ввод пароля<br/>@Html.EditorFor(x => x.ConfirmPassword)</td><td>Отчество<br/>@Html.TextBoxFor(x => x.MiddleName)</td><td style="text-align: center; vertical-align: bottom"><input type="submit" id="RegButton" value="Регистрация"/></td></tr>
+        </table>
+    }
+</div>
+
+@if (ViewBag.Employees != null)
+{
+    @Html.Grid((IEnumerable<Domain.Entities.Employee>) ViewBag.Employees).Sort((GridSortOptions) ViewBag.Sort).Columns(
+        column =>
+            {
+                column.For(x => x.Login).Named("Логин");
+                column.For(x => x.LastName).Named("Фамилия");
+                column.For(x => x.Post).Named("Должность");
+                column.For(x => x.Department).Named("Отдел");
+                column.For(x => Html.ActionLink("Удалить", "DeleteLogin", new {id = x.Id})).Encode(false);
+            })
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Регистрация проб", "Index", "Window")
+            @Html.ActionLink("Направления", "Directions", "Window")
+            @Html.ActionLink("Отчёт", "Report", "Window")
+            @Html.ActionLink("Сотрудники", "Employees", "Window")
+        </div>
+    </div>
+}

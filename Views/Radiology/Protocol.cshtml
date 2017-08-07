@@ -1,0 +1,38 @@
+﻿@model Web.Models.ProtocolViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Protocol</title>
+</head>
+<body>
+    <div>
+        <table width="700">
+            <tr><th>Протокол исследований от @DateTime.Now.ToShortDateString().</th></tr>
+            <tr><td style="line-height: 2">
+                    <br />
+                    Наимерование: &#8470; @Model.SampleId - @Model.SampleName.<br/>
+                    Дата проведения исследований: @Model.ResultDate.<br/>
+                    Заявитель: @Model.Applicant.<br/>
+                    Изготовитель: @Model.Manufacturer.<br/>
+                    Дата отбора: @Model.SamplingDate.<br/>
+                    Методика отбора: @Model.SamplingTechniqueDesignation @Model.SamplingTechniqueName.<br/>
+                    Условия проведения исследований: температура - @Model.Temperature &#176;С, влажность - @Model.Humidity &#37;,<br />
+                    атмосферное давление - @Model.Pressure кПа, MЭД - @Model.Radiation мкЗв/ч.<br/>
+                    Методика исследований: @Model.TechniqueOfTestsDesignation @Model.TechniqueOfTestsName.<br/>
+                    Цель исследований: на соответствие требованиям @Model.TechnicalRegulationDesignation @Model.TechnicalRegulationName.<br/>
+                    Показатель: @Model.IndicatorName.<br/>
+                    Результат: @Model.ResultValue @Model.Units.<br/>
+                    Допустимый уровень: @Model.LevelValue @Model.Units.<br/>
+                    Средство измерения: @Model.GageName Зав. &#8470; @Model.SerialNumber.<br/>
+                </td></tr>
+        </table>
+    </div>
+</body>
+</html>

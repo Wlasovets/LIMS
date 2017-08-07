@@ -1,0 +1,31 @@
+﻿@model Web.Models.MetrologyReportViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+            <table width="500">
+                <caption>
+                    <p align="left">Отчёт о количестве исследований<br/>
+                    Отчетный период: @Model.FirstDate.ToShortDateString() - @Model.LastDate.ToShortDateString()</p>
+                </caption>
+                <tr><th>Средство измерения</th><th>Количество исследований</th></tr>
+                <tr><td colspan="2"><hr/></td></tr>
+                @foreach(var gageGroupe in Model.GageGroups)
+                {
+                    <tr><td>@gageGroupe.GageName &#8470;@gageGroupe.SerialNumber</td><td style="text-align: center">@gageGroupe.CountOfResults</td></tr>
+                }
+                <tr><td colspan="2"><hr/></td></tr>
+                <tr><td>всего</td><td style="text-align: center">@Model.GageGroups.Sum(x => x.CountOfResults)</td></tr>
+            </table>
+        </div>
+    </body>
+</html>

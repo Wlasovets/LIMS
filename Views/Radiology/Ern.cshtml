@@ -1,0 +1,43 @@
+﻿@model Web.Models.ErnViewModel
+
+@{
+    ViewBag.FirstHalf = "радио";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Расчет удельной активности естественных радионуклидов</h3>
+
+
+@using(Html.BeginForm())
+{
+    <table>
+        <tr><td>Активность радия, Бк/кг<br/>@Html.TextBoxFor(x => x.RadiumActivity)</td><td>Погрешность радия, Бк/кг<br/>@Html.TextBoxFor(x => x.RadiumError)</td></tr>
+        <tr><td>@Html.ValidationMessageFor(x => x.RadiumActivity)</td><td>@Html.ValidationMessageFor(x => x.RadiumError)</td></tr>
+        <tr><td>Активность тория, Бк/кг<br/>@Html.TextBoxFor(x => x.ThoriumActivity)</td><td>Погрешность тория, Бк/кг<br/>@Html.TextBoxFor(x => x.ThoriumError)</td></tr>
+        <tr><td>@Html.ValidationMessageFor(x => x.ThoriumActivity)</td><td>@Html.ValidationMessageFor(x => x.ThoriumError)</td></tr>
+        <tr><td>Активность калия, Бк/кг<br/>@Html.TextBoxFor(x => x.PotassiumActivity)</td><td>Погрешность калия, Бк/кг<br/>@Html.TextBoxFor(x => x.PotassiumError)</td></tr>
+        <tr><td>@Html.ValidationMessageFor(x => x.PotassiumActivity)</td><td>@Html.ValidationMessageFor(x => x.PotassiumError)</td></tr>
+        <tr><td colspan="2" style="text-align: center">
+                
+                @if (Model != null && Model.Result != null)
+                {
+                    <h3>дельная активность ЕРН: @Model.Result Бк/кг</h3>
+                }
+                
+            </td></tr>
+        <tr><td></td><td style="text-align: right"><input type="submit" value="Рассчитать" id="ErnBotton"/></td></tr>
+    </table>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Radiology")
+            @Html.ActionLink("Результаты", "Results", "Radiology")
+            @Html.ActionLink("Вычисления для Robotron", "Robotron", "Radiology")
+            @Html.ActionLink("Вычисления ЕРН", "Ern", "Radiology")
+            @Html.ActionLink("Вычисления для УМФ-2000", "Umf", "Radiology")
+        </div>
+    </div>
+}

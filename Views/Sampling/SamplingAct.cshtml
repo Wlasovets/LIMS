@@ -1,0 +1,32 @@
+﻿@model Web.Models.ActOfSamplingViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SamplingAct</title>
+</head>
+<body>
+    <div>
+        <table width="700">
+            <tr><th>Акт отбора проб от @DateTime.Now.ToShortDateString().</th></tr>
+            <tr><td style="line-height: 2">
+                    <br/><br/>
+                    Наименование: &#8470; @Model.SampleId. @Model.SampleName.<br/>
+                    Дата отбора: @Model.SamplingDate.ToShortDateString().<br/>
+                    Заявитель: @Model.Applicant.<br/>
+                    Изготовитель: @Model.Manufacturer.<br/>
+                    Сотрудник ответственный за отбор: @Model.EmployeePost @Model.EmployeeLastName @Model.EmployeeFirstName @Model.EmployeeMiddleName.<br/>
+                    В соответствии с требованиями: @Model.SamplingTechniqueDesignation @Model.SamplingTechniqueName.<br/>
+                    В количестве: @Model.Number @Model.Units.<br/><br/><br/>
+                    Потпись ответственного лица __________________
+                </td></tr>
+        </table>
+    </div>
+</body>
+</html>

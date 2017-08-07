@@ -1,0 +1,29 @@
+﻿@model Domain.Entities.Gage
+
+@{
+    ViewBag.FirstHalf = "метро";
+    ViewBag.SecondHalf = "логия";
+}
+
+<h3>@Model.Name, зав. &#8470; @Model.SerialNumber</h3>
+
+@using (Html.BeginForm(Model.Id))
+{
+    <p>@Html.RadioButtonFor(x => x.State, "не поверен") не поверен</p>
+    <p>@Html.RadioButtonFor(x => x.State, "поверен") поверен</p>
+    <p>@Html.RadioButtonFor(x => x.State, "в поверке") в поверке</p>
+    <p>@Html.RadioButtonFor(x => x.State, "ремонт") ремонт</p>
+    <p>@Html.RadioButtonFor(x => x.State, "консервация") консервация</p>
+    <p>@Html.RadioButtonFor(x => x.State, "списан") списан</p>
+    <input type="submit" id="ChangeStateButton" value="Изменить"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Средства измерений", "Index", "Metrology")
+            @Html.ActionLink("ТНПА", "TechnicalRegulations", "Metrology")
+            @Html.ActionLink("Отчёт", "Report", "Metrology")
+        </div>
+    </div>
+}

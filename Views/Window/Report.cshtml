@@ -1,0 +1,31 @@
+﻿@model Web.Models.WindowReportViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Report</title>
+    </head>
+    <body>
+        <div>
+            <table width="300">
+                <caption><p align="left">Отчёт о количестве исследований<br/>
+                             Отчетный период: @Model.GenerateReport.FirstDate.ToShortDateString() - @Model.GenerateReport.LastDate.ToShortDateString()<br/>
+                             Лабораторынй отдел: @Model.GenerateReport.Department.Name</p></caption>
+                <tr><th>Показатель</th><th>Количество</th></tr>
+                <tr><td colspan="2"><hr/></td></tr>
+                @foreach(var resultGroupe in Model.CountOfResults)
+                {
+                    <tr><td>@resultGroupe.Indicator</td><td style="text-align: center">@resultGroupe.Count</td></tr>
+                }
+                <tr><td colspan="2"><hr/></td></tr>
+                <tr><td>всего</td><td style="text-align: center">@Model.CountOfResults.Sum(x => x.Count)</td></tr>
+            </table>
+        </div>
+    </body>
+</html>

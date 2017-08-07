@@ -1,0 +1,26 @@
+﻿@model Web.Models.LoginViewModel
+
+@{
+    ViewBag.FirstHalf = "токсико";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Вход</h2>
+@using (Html.BeginForm())
+{
+    <p>@Html.ValidationSummary(true)</p>
+    <p>
+        Логин:<br/>@Html.TextBoxFor(x => x.LoginName) @Html.ValidationMessageFor(x => x.LoginName)
+    </p>
+    <p>
+        Пароль:<br />@Html.EditorFor(x => x.Password) @Html.ValidationMessageFor(x => x.Password)
+    </p>
+    <input type="submit" id="LoginButton" value="Вход"/>
+}
+
+@section Menu{
+    <div id="lefty">
+        <img src="~/Content/images/Toxicology.jpg" width="170" height="170"/>
+    </div>
+}

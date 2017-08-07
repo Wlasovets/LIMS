@@ -1,0 +1,44 @@
+﻿@model Web.Models.UmfViewModel
+
+@{
+    ViewBag.FirstHalf = "радио";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Расчет удельной альфа- и бета-активности для радиометра УМФ-2000</h3>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <table width="100%">
+        <tr><td colspan="2">Время измерения, с<br/>@Html.TextBoxFor(x => x.Time)</td></tr>
+            <tr><td><h3>альфа-излучение</h3></td><td><h3>бета-излучение</h3></td></tr>
+            <tr><td>Число импульсов фона 1<br />@Html.TextBoxFor(x => x.AmountOfBackgroundAlphaDecays1)</td><td>Число импульсов фона 1<br />@Html.TextBoxFor(x => x.AmountOfBackgroundBetaDecays1)</td></tr>
+            <tr><td>Число импульсов фона 2<br />@Html.TextBoxFor(x => x.AmountOfBackgroundAlphaDecays2)</td><td>Число импульсов фона 2<br />@Html.TextBoxFor(x => x.AmountOfBackgroundBetaDecays2)</td></tr>
+            <tr><td>Число импульсов фона 3<br />@Html.TextBoxFor(x => x.AmountOfBackgroundAlphaDecays3)</td><td>Число импульсов фона 3<br />@Html.TextBoxFor(x => x.AmountOfBackgroundBetaDecays3)</td></tr>
+            <tr><td>Число импульсов пробы 1<br />@Html.TextBoxFor(x => x.AmountAlphaDecaysOfSample1)</td><td>Число импульсов пробы 1<br />@Html.TextBoxFor(x => x.AmountBetaDecaysOfSample1)</td></tr>
+            <tr><td>Число импульсов пробы 2<br />@Html.TextBoxFor(x => x.AmountAlphaDecaysOfSample2)</td><td>Число импульсов пробы 2<br />@Html.TextBoxFor(x => x.AmountBetaDecaysOfSample2)</td></tr>
+            <tr><td>Число импульсов пробы 3<br />@Html.TextBoxFor(x => x.AmountAlphaDecaysOfSample3)</td><td>Число импульсов пробы 3<br />@Html.TextBoxFor(x => x.AmountBetaDecaysOfSample3)</td></tr>
+            <tr><td colspan="2"><input type="submit" value="Рассчитать" id="UmfButton"/></td></tr>
+
+            @if (Model != null && Model.AlphaActivity != null)
+            {
+                <tr><td>Альфа-активность: @Model.AlphaActivity Бк</td><td>Бета-активность: @Model.BetaActivity Бк </td></tr>
+                <tr><td>Абсолютная неопределенность: @Model.AbsoluteUncertaintyForAlpha Бк</td><td>Абсолютная неопределенность: @Model.AbsoluteUncertaintyForBeta Бк</td></tr>
+            }
+        </table>
+    }
+</div>
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Radiology")
+            @Html.ActionLink("Результаты", "Results", "Radiology")
+            @Html.ActionLink("Вычисления для Robotron", "Robotron", "Radiology")
+            @Html.ActionLink("Вычисления ЕРН", "Ern", "Radiology")
+            @Html.ActionLink("Вычисления для УМФ-2000", "Umf", "Radiology")
+        </div>
+    </div>
+}

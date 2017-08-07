@@ -1,0 +1,31 @@
+﻿@model Web.Models.GenerateReportViewModel
+
+@{
+    ViewBag.FirstHalf = "одно ";
+    ViewBag.SecondHalf = "окно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Формирование отчёта</h3>
+
+<div id="block">
+    @using(Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <p>Лабораторный отдел<br/>@Html.DropDownListFor(x => x.Department.Name, new SelectList(ViewBag.Departments, "Name", "Name")) @Html.ValidationMessageFor(x => x.Department)</p>
+        <p>Начало отчетного периода<br/>@Html.TextBoxFor(x => x.FirstDate) @Html.ValidationMessageFor(x => x.FirstDate)</p>
+        <p>Конец отчетного периода<br/>@Html.TextBoxFor(x => x.LastDate) @Html.ValidationMessageFor(x => x.LastDate)</p>
+        <input type="submit" value="Отчёт" id="ReportButton"/>
+    }
+</div>
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Регистрация проб", "Index", "Window")
+            @Html.ActionLink("Направления", "Directions", "Window")
+            @Html.ActionLink("Отчёт", "Report", "Window")
+            @Html.ActionLink("Сотрудники", "Employees", "Window")
+        </div>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@model Web.Models.ResearchSampleViewModel
+
+@{
+    ViewBag.FirstHalf = "токсико";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Ввод результата исследования пробы <br/>&#8470; @Model.SampleId - @Model.SampleName</h3>
+
+@using(Html.BeginForm())
+{
+    <div id="block">
+        <table>
+            <tr style="text-align: center" ><td><b>результат</b></td><td><b>условия исследований</b></td><td><b>ответственное лицо</b></td></tr>
+            <tr><td>Показатель<br />@Html.TextBoxFor(x => x.Indicator)</td><td>Температура, &#176;C<br/>@Html.TextBoxFor(x => x.Temperature)</td><td>Фамилия<br/>@Html.TextBoxFor(x => x.EmployeeLastName)</td></tr>
+            <tr><td>Единицы измерения<br/>@Html.TextBoxFor(x => x.Units)</td><td>Влажность, &#37;<br/>@Html.TextBoxFor(x => x.Humidity)</td><td>Имя<br/>@Html.TextBoxFor(x => x.EmployeeFirstName)</td></tr>
+            <tr><td>Значение результата<br/>@Html.TextBoxFor(x => x.Result)</td><td>Атмосферное давление, кПа<br/>@Html.TextBoxFor(x => x.Pressure)</td><td>Отчество<br/>@Html.TextBoxFor(x => x.EmployeeMiddleName)</td></tr>
+            <tr><td>Допустимый уровень<br/>@Html.TextBoxFor(x => x.AdmissibleLever)</td><td>Фон, мкЗв&#8260;ч<br/>@Html.TextBoxFor(x => x.Radiation)</td><td>Должность<br/>@Html.TextBoxFor(x => x.EmployeePost)</td></tr>
+            <tr style="text-align: center"><td><br /><b>нормирующий документ</b></td><td><br /><b>методика исследований</b></td><td><br /><b>средство измерения</b></td></tr>
+            <tr><td>Обозначение ТНПА<br/>@Html.TextBoxFor(x => x.NormativeDocumentDesignation)</td><td>Обозначение методики<br/>@Html.TextBoxFor(x => x.TechniqueOfTestDesignation)</td><td>Наименование СИ<br/>@Html.TextBoxFor(x => x.GageName)</td></tr>
+            <tr><td>Наименование ТНПА<br/>@Html.TextBoxFor(x => x.NormativeDocumentName)</td><td>Наименование методики<br/>@Html.TextBoxFor(x => x.TechniqueOfTestName)</td><td>Заводской номер СИ<br/>@Html.TextBoxFor(x => x.GageSerialNumber)</td></tr>
+            <tr><td>@Html.HiddenFor(x => x.SampleId)</td><td></td><td style="text-align: right"><input type="submit" value="Ввод" id="ResearchButton"/></td></tr>
+        </table>
+    </div>
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Toxicology")
+            @Html.ActionLink("Результаты", "Results", "Toxicology")
+        </div>
+    </div>
+}

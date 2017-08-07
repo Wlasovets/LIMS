@@ -1,0 +1,32 @@
+﻿@model Web.Models.SelectedSampleViewModel
+
+@{
+    ViewBag.FirstHalf = "отбор ";
+    ViewBag.SecondHalf = "проб";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Отбор пробы</h3>
+
+@using(Html.BeginForm())
+{
+    <div id="block">
+    <table>
+        <tr><td>Количество<br/>@Html.TextBoxFor(x => x.NumberOfSelectedSample)</td><td>Фамилия испольнителя<br/>@Html.TextBoxFor(x => x.EmployeeLastName)</td><td>Место отбора<br/>@Html.TextBoxFor(x => x.SamplingPlace)</td></tr>
+        <tr><td>Единицы измерения<br/>@Html.TextBoxFor(x => x.Units)</td><td>Имя<br/>@Html.TextBoxFor(x => x.EmployeeFirstName)</td><td>Изготовитель<br/>@Html.TextBoxFor(x => x.Manufacturer)</td></tr>
+        <tr><td>Обозначение ТНПА<br/>@Html.TextBoxFor(x => x.TrDesignation)</td><td>Отчество<br/>@Html.TextBoxFor(x => x.EmployeeMiddleName)</td><td></td></tr>
+        <tr><td>Наименование ТНПА<br/>@Html.TextBoxFor(x => x.TrName)</td><td>Должность<br/>@Html.TextBoxFor(x => x.EmployeePost)</td><td></td></tr>
+        <tr><td>@Html.HiddenFor(x => x.SampleId)</td><td style="text-align: center"><input type="submit" value="Отобрать" id="SampleButton"/></td><td></td></tr>
+    </table>
+    </div>
+    
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "Sampling")
+            @Html.ActionLink("Отобранные пробы", "SelectedSamples", "Sampling")
+        </div>
+    </div>
+}

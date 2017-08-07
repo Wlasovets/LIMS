@@ -1,0 +1,30 @@
+﻿@model Web.Models.RegistrationSampleViewModel
+
+@{
+    ViewBag.Title = "RegistrationSample";
+    ViewBag.FirstHalf = "одно ";
+    ViewBag.SecondHalf = "окно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @using(Html.BeginForm())
+    {
+        <p>@Html.ValidationSummary(true)</p>
+        <p>Наименование пробы<br/>@Html.TextBoxFor(x=>x.Name) @Html.ValidationMessageFor(x=>x.Name)</p>
+        <p>Заявитель<br/>@Html.TextBoxFor(x=>x.Applicant) @Html.ValidationMessageFor(x=>x.Applicant)</p>
+        <p>Номер контактного телефона<br/>@Html.TextBoxFor(x=>x.PhoneNumber)</p>
+        <input type="submit" id="RegSampleButton" value="Зарегистрировать"/>
+    }
+</div>
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Регистрация проб", "Index", "Window")
+            @Html.ActionLink("Направления", "Directions", "Window")
+            @Html.ActionLink("Отчёт", "Report", "Window")
+            @Html.ActionLink("Сотрудники", "Employees", "Window")
+        </div>
+    </div>
+}

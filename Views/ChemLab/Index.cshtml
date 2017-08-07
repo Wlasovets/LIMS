@@ -1,0 +1,31 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Pager
+@using MvcContrib.UI.Grid
+@model IEnumerable<Web.Models.DirectionToResearchViewModel>
+
+@{
+    ViewBag.FirstHalf = "лаборатория ";
+    ViewBag.SecondHalf = "химии";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Направления в лабораторию химии</h3>
+
+@Html.Grid(Model).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+                                    {
+                                        column.For(x => x.SampleId).Named("№");
+                                        column.For(x => x.SampleName).Named("Наименование");
+                                        column.For(x => x.DirectionDate.ToShortDateString()).Named("Направление").SortColumnName("DirectionDate");
+                                        column.For(x => x.Applicant).Named("Заявитель");
+                                        column.For(x => @Html.ActionLink("Испытать", "ResearchSample", new {id = x.SampleId}));
+                                    })
+
+@Html.Raw(Html.Pager((IPagination)Model).Format("").First(null).Last(null).Next("Следующая страница").Previous("‌​Предыдущая страница").ToString())
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Направления", "Index", "ChemLab")
+            @Html.ActionLink("Результаты", "Results", "ChemLab")
+        </div>
+    </div>
+}

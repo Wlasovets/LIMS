@@ -1,0 +1,40 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@model Web.Models.TechnicalRegulationsViewModel
+
+@{
+    ViewBag.FirstHalf = "метро";
+    ViewBag.SecondHalf = "логия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Технические нормативно-правовые акты</h3>
+
+@using(Html.BeginForm())
+{
+    <table id="block">
+        <tr><td>Обозначение<br />@Html.TextBoxFor(x => x.TrDesignation)</td><td>Наименование<br/>@Html.TextBoxFor(x => x.TrName)</td><td>Примечание<br/>@Html.TextBoxFor((x => x.TrNote))</td></tr>
+        <tr><td></td><td></td><td style="text-align: right"><input id="TrButton" type="submit" value="Добавить"/></td></tr>
+    </table>
+}
+
+@if (Model.TechnicalRegulations != null)
+{
+    @Html.Grid(Model.TechnicalRegulations).Sort((GridSortOptions) ViewBag.Sort).Columns(column =>
+                                                                                                  {
+                                                                                                      column.For(x => x.Designation).Named("Обозначение");
+                                                                                                      column.For(x => x.Name).Named("Наименование");
+                                                                                                      column.For(x => x.Note).Named("Примечание");
+                                                                                                  })
+}
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Средства измерений", "Index", "Metrology")
+            @Html.ActionLink("ТНПА", "TechnicalRegulations", "Metrology")
+            @Html.ActionLink("Отчёт", "Report", "Metrology")
+        </div>
+    </div>
+}

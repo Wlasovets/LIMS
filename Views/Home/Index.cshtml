@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+    ViewBag.FirstHalf = "лабора";
+    ViewBag.SecondHalf = "тория";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div id="main">
+            <div id="header">
+                <span class="title">@ViewBag.FirstHalf<span class="darktitle">@ViewBag.SecondHalf</span></span><br/>
+            </div>
+                
+            <div align="center">
+                <table width="80%" style="text-align: center">
+                    <tr>
+                        <td><a href="/Account/WindowLogin"><img alt="одно окно" src="~/Content/images/Window.jpg" title="одно окно" width="150" height="150">
+                                                           <br/><b style="font-size: 11pt; color: #444444">одно окно</b>
+                            </a></td>
+                        <td><a href="/Account/MetrologyLogin"><img alt="метрология" src="~/Content/images/Metrology.jpg" title="метрология" width="150" height="150">
+                                                              <br/><b style="font-size: 11pt; color: #444444">метрология</b>
+                            </a></td>
+                        <td><a href="/Account/SamplingLogin"><img alt="отбор проб" src="~/Content/images/Sampling.jpg" title="отбор проб" width="150" height="150">
+                                                             <br/><b style="font-size: 11pt; color: #444444">отбор проб</b>
+                            </a></td>
+                    </tr>
+                </table>
+                <p><br/><br/></p>
+                <table width="100%" style="text-align: center">
+                    <tr>
+                        <td><a href="/Account/RadiologyLogin"><img alt="радиология" src="~/Content/images/Radiology.jpg" title="радиология" width="150" height="150">
+                            <br/><b style="font-size: 11pt; color: #444444">радиология</b>
+                            </a></td>
+                        <td><a href="/Account/ToxicologyLogin"><img alt="токсикология" src="~/Content/images/Toxicology.jpg" title="токсикология" width="150" height="150">
+                            <br/><b style="font-size: 11pt; color: #444444">токсикология</b>
+                            </a></td>
+                        <td><a href="/Account/ChemistryLogin"><img alt="химлаборатория" src="~/Content/images/Chemlab.jpg" title="химлаборатория" width="150" height="150">
+                            <br/><b style="font-size: 11pt; color: #444444">химлаборатория</b>
+                            </a></td>
+                        <td><a href="/Account/BacteriologyLogin"><img alt="микробиология" src="~/Content/images/Microbiology.jpg" title="микробиология" width="150" height="150">
+                            <br/><b style="font-size: 11pt; color: #444444">микробиология</b>
+                            </a></td>
+                    </tr>
+                </table>  
+            </div>
+
+            <div id="footer" style="text-align: center; position: absolute; bottom: 10px; left: 40%"> &copy; 2014 Власовец В.А. Дипломная работа. </div>
+        </div>
+    </body>
+</html>
+
+
+    
+    

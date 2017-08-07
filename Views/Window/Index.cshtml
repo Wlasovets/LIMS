@@ -1,0 +1,32 @@
+﻿@using MvcContrib.Pagination
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@model IEnumerable<Domain.Entities.Sample>
+@{
+    ViewBag.FirstHalf = "одно ";
+    ViewBag.SecondHalf = "окно";
+}
+
+@Html.ActionLink("Зарегистрировать пробу", "RegistrationSample", "Window")
+<p></p>
+
+@Html.Grid(Model).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+                                    {
+                                        column.For(x => x.RegistrationNumber).Named("Номер");
+                                        column.For(x => x.Name).Named("Наименование");
+                                        column.For(x => x.Applicant).Named("Заявитель");
+                                        column.For(x => x.DateOfRegistration.ToShortDateString()).Named("Регистрация").SortColumnName("DateOfRegistration");
+                                        column.For(x => Html.ActionLink("Направить", "Direct", new {id = x.RegistrationNumber})).Encode(false);
+                                    })
+@Html.Raw(Html.Pager((IPagination)Model).Format("").First(null).Last(null).Next("Следующая страница").Previous("‌​Предыдущая страница").ToString())
+
+@section Menu{
+    <div id="lefty">
+        <div id="menu">
+            @Html.ActionLink("Регистрация проб", "Index", "Window")
+            @Html.ActionLink("Направления", "Directions", "Window")
+            @Html.ActionLink("Отчёт", "Report", "Window")
+            @Html.ActionLink("Сотрудники", "Employees", "Window")
+        </div>
+    </div>
+}
